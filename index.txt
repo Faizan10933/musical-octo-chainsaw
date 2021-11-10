@@ -72,3 +72,61 @@ else
 }
 
 }
+
+
+
+
+server!! 
+
+
+import java.io.*;
+
+import java.net.*;
+
+import java.util.*;
+
+public class EchoServer{
+
+public static void main(String args[])
+
+{
+
+System.out.println("Echo Server is started");
+
+try(ServerSocket echoserver=new ServerSocket(8000))
+
+{
+
+Socket clientsocket=echoserver.accept();
+
+System.out.println("W R CONNECTED TO CLIENT");
+
+BufferedReader buffer=new BufferedReader(new InputStreamReader(clientsocket.getInputStream()));
+
+PrintWriter output=new PrintWriter(clientsocket.getOutputStream(),true);
+
+String line;
+
+while((line=buffer.readLine())!=null)
+
+{
+
+System.out.println("on server:"+line);
+
+output.println(line);
+
+}
+
+}
+
+catch(Exception e)
+
+{
+
+e.printStackTrace();
+
+}
+
+}
+
+}
