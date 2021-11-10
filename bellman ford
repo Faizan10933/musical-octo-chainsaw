@@ -122,3 +122,98 @@ e1.printStackTrace();
 }
 
 
+
+
+
+echo client
+
+
+import java.io.*;
+import java.net.*;
+public class Echoclient {
+
+	public static void main(String[] args)throws Exception
+	{
+		try
+		{
+		int port;
+		BufferedReader Buf=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter the port Address:");
+		port=Integer.parseInt(Buf.readLine());
+		Socket sok=new Socket("local host",port);
+		if(sok.isConnected()==true)
+			System.out.println("server socket is connected successfully");
+		InputStream in=sok.getInputStream();
+		OutputStream ou=sok.getOutputStream();
+		PrintWriter pr=new PrintWriter(ou);
+		BufferedReader buf1=new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader buf2=new BufferedReader(new InputStreamReader(in));
+		String str1,str2;
+		System.out.println("enter the message:");
+		str1=buf1.readLine();
+		pr.println(str1);
+		pr.flush();
+		System.out.println("message send successfully.");
+		str2=buf2.readLine();
+		System.out.println("message from server:"+str2);
+	}
+	 catch(Exception e)
+	{
+		 System.out.println("error:"+e.getMessage());
+	}
+}
+}
+		
+	
+
+	
+echo server
+
+
+
+package SERVER;
+import java.io.*;
+import java.net.*;
+public class EchoServer
+{
+
+	public static void main(String[] args) throws Exception
+	{
+		try
+		{
+			int port;
+			BufferedReader Buf=new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Enter the port Address:");
+			port=Integer.parseInt(Buf.readLine());
+			ServerSocket sok=new ServerSocket(port);
+			System.out.println("server is ready to receive a message.");
+			System.out.println("waiting......");
+			Socket so=sok.accept();
+			if(so.isConnected()==true)
+				System.out.println("client socket is connected successfully.");
+			InputStream in=so.getInputStream();
+			OutputStream ou=so.getOutputStream();
+			PrintWriter pr=new PrintWriter(ou);
+			BufferedReader buf=new BufferedReader(new InputStreamReader(in));
+			String str=buf.readLine();
+			System.out.println("message received from client:" +str);
+			System.out.println("this message is forwarded to client.");
+			pr.println(str);
+			pr.flush();
+		}
+		 catch(Exception e)
+		{
+			 System.out.println("error:"+e.getMessage());
+		}
+	}
+}
+			
+		
+
+	
+
+
+
+
+
+
