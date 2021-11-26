@@ -31,5 +31,15 @@ loan_no int references loan(loan_no)on delete cascade
 select customer_name from branch,account,depositor where branch.branch_name=account.branch_name and account.account_no=depositor.account_no and branch_city='bangalore' group by customer_name having count(*)>=2;
 
 frooooo
-select customer_name from branch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun
+select customer_name from b
+
+
+ 
+ ​select customer_name from branch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun.bname)=(select count(branch.bname) from branch where branch.body='bangalore');
+
+
+
+ 
+
+ select customer_name from branch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun.bname)=(select count(branch.bname) from branch where branch.body='bangalore');ranch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun
 t. 
