@@ -43,3 +43,23 @@ select customer_name from b
 
  select customer_name from branch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun.bname)=(select count(branch.bname) from branch where branch.body='bangalore');ranch, account,depositor where branch where branch.bname=account.bname and account.acc_no=depositor.acc_no and city='bangalore' group by depositor.customer_name having count(accoun
 t. 
+
+
+
+[11/25, 23:15] Rahul Verman: Select a.accno from account a branch b where b.branch-city='city_name ;
+
+[11/25, 23:18] Rahul Verman: Select customer-name from borrower;
+
+[11/25, 23:22] Rahul Verman: Select customer-name 
+
+from customer 
+
+group by customer-name
+
+ having count(*)>2;
+
+[11/25, 23:41] Rahul Verman: delete from account
+
+where branch-name in (select branch-name from branch 
+
+where branch-city='city_name');
