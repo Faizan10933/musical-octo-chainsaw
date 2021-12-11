@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="myform.php">
+        <h1>MY DETAILS</h1>
+    <label for="mid">id</label>
+    <input type="text" name="mid"><br>
+    <label for="mname">name</label>
+    <input type="text" name="mname"><br>
+    <label for="msalary">salary</label>
+    <input type="text" name="msalary"><br>
+    <label for="memail">email</label>
+    <input type="text" name="memail"><br>
+    <input type="submit">
+</form>
+    </body>
+</body>
+</html>
+
+
+<?php
+$id =$_POST["mid"];
+$name = $_POST["mname"];
+$salary = $_POST["msalary"];
+$email = $_POST["memail"];
+$conn=mysqli_connect("localhost","root","","my_db");
+if(!$conn)
+    echo "Datbase error".mysqli_error($conn);
+else
+{
+    $sql="INSERT INTO my_table VALUES($id,'&name',$salary,'$email')";
+        
+    if(mysqli_query($conn,$sql))
+    echo "insert value succesfully";
+else
+    echo "insert error error".mysqli_error($conn);
+
+
+}
+mysqli_close($conn);
+?>
+}
+
+
+
+
+
+insert--\
+<?php
+$conn=mysqli_connect("localhost","root","","my_db");
+if(!$conn)
+    echo "Datbase error".mysqli_error($conn);
+else
+{
+    $sql="INSERT INTO my_table VALUES(01,'FAIZAN',80000,'fzn@gmail.com')";
+        
+    if(mysqli_query($conn,$sql))
+    echo "insert value succesfully";
+else
+    echo "insert error error".mysqli_error($conn);
+
+
+}
+mysqli_close($conn);
+?>
+}
+
+
+create table---
+
+
+<?php
+$conn=mysqli_connect("localhost","root","","my_db");
+if(!$conn)
+    echo "Datbase error".mysqli_error($conn);
+else
+{
+    $sql="CREATE TABLE my_table(
+        my_id INTEGER(6) PRIMARY KEY,
+        my_name VARCHAR(20) NOT NULL,
+        my_salary INTEGER(10) NOT NULL,
+        my_email VARCHAR(20) NOT NULL)";
+    if(mysqli_query($conn,$sql))
+    echo "Table created succesfully";
+else
+    echo "table error".mysqli_error($conn);
+
+
+}
+mysqli_close($conn);
+?>
+}
+
+
+
+create table--
+
+<?php
+$conn=mysqli_connect("localhost","root","");
+if(!$conn)
+    echo "can not connect to server".mysqli_error($conn);
+else
+{
+    $sql="CREATE DATABASE my_db";
+if(mysqli_query($conn,$sql))
+    echo "Databse created succesfully";
+else
+    echo "error".mysqli_error($conn);
+
+
+}
+mysqli_close($conn);
+?>
