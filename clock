@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:cyan;
+
+        }
+        #clock{
+            font-size: 50pt;
+            margin:20px;
+            padding:20px;
+            width:400px;
+            border:medium dotted pink;
+        }
+    </style>
+</head>
+<body>
+    <h1>Digital Clock</h1>
+    <?php
+    date_default_timezone_set('Asia/Kolkata');
+    $page=$_SERVER['PHP_SELF'];
+    $sec=1;
+    header("Refresh:$sec; url=$page");
+    ?>
+    <div id="clock">
+    <?php
+    echo idate("H").":".idate("i").":".idate("s");
+    usleep(100);
+    ?>
+    </div>
+
+
+</body>
+</html>
