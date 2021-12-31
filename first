@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<style>
+    .A{
+
+    text-align: center;
+    font-weight: bold;
+    }
+    .B{
+        color: brown;
+    }
+</style>
+<body>
+    <h1 style="color: burlywood; font-style: italic; text-decoration: cadetblue;">Computer Science and Engineringd</h1>
+    <h4 class="A">Labotaries for cse</h4>
+    <p class="B">Various lab for cse dept</p>
+    <div id="A">
+    <p>Which incluDEe</p>
+    <ol>
+        <li>unix</li>
+        <li>web programming
+        </li>
+
+    </ol>
+</div>
+    
+</body>
+</html>
