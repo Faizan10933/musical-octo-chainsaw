@@ -1,0 +1,63 @@
+studentform.php
+
+<?php
+$usn =$_POST["musn"];
+$name = $_POST["mname"];
+$branch = $_POST["mbranch"];
+$sem = $_POST["msem"];
+$conn=mysqli_connect("localhost","root","","my_db");
+if(!$conn)
+    echo "Datbase error".mysqli_error($conn);
+else
+{
+    $sql="INSERT INTO my_table VALUES($usn,'$name','$branch',$sem)";
+        
+    if(mysqli_query($conn,$sql))
+    echo "insert value succesfully";
+else
+    echo "insert error error".mysqli_error($conn);
+
+
+}
+mysqli_close($conn);
+?>
+
+
+
+
+_______
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color: powderblue;
+            text-align: center;
+        }
+        h1{
+            color: goldenrod;
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="studentform.php">
+        <h1>Student Information</h1>
+    <label for="usn">usn</label>
+    <input type="text" name="musn"><br><br>
+    <label for="mname">name</label>
+    <input type="text" name="mname"><br><br>
+    <label for="mbranch">branch</label>
+    <input type="text" name="mbranch"><br><br>
+    <label for="msem">sem</label>
+    <input type="text" name="msem"><br><br>
+    <input type="submit">
+</form>
+    </body>
+</body>
+</html>
