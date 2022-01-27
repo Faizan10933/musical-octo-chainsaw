@@ -1,0 +1,104 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: faizan
+  host: localhost
+
+
+development:
+  <<: *default
+  database: activemealnew
+
+test:
+  <<: *default
+  database: Activmealsnew
+
+production:
+  <<: *default
+  database: Activmeals_ROR_production
+  username: Activmeals_ROR
+  password: <%= ENV['ACTIVMEALS_ROR_DATABASE_PASSWORD'] %>
+
+
+
+
+
+Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)rescue ActiveAdmin::DatabaseHitDuringLoad
+  devise_for :users
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'home#home'
+  resources :meal_menus
+  resources :meal_packages
+  resources :meal_cards
+  resources :grab_and_go_meals
+  resources :contacts
+  #resources :carts
+  get 'fetch_location_based_meals', to: 'grab_and_go_meals#fetch_location_based_meals'
+
+  #cart
+  get 'cart_page', to: 'carts#cart_page'
+  post 'meal_menu_add_to_cart', to: 'carts#meal_menu_add_to_cart'
+  post 'meal_package_add_to_cart', to: 'carts#meal_package_add_to_cart'
+  post 'meal_cards_add_to_cart', to: 'carts#meal_cards_add_to_cart'
+  
+  #checkout
+  get 'calculate_total_amount', to: 'checkout#calculate_total_amount'
+  get 'calculate_meal_price', to: 'checkout#calculate_meal_price'
+  delete '/checkout/:id' => 'checkout#destroy' 
+  post 'add_address_checkout', to: 'checkout#add_address',as: 'add_address'
+  post 'checkout_all_orders', to: 'checkout#checkout_all_orders', as: 'checkout_all_orders'
+  post 'new_card_stripe_session_create',to: 'checkout#new_card_stripe_session_create', as: 'new_card_stripe_session_create'
+  get 'new_card_order_checkout', to: 'checkout#new_card_order_checkout', as: 'new_card_order_checkout'
+  get 'transaction_success_page', to: 'checkout#transaction_success_page', as: 'transaction_success_page'
+  get 'transaction_failure_page', to: 'checkout#transaction_failure_page', as: 'transaction_failure_page'
+  get 'order_details/:id',to: 'checkout#order_details',as: 'order_details'
+  get 'transaction_history_page/:id', to: 'checkout#transaction_history_page', as: 'transaction_history_page'
+
+  #Discount Coupons
+  get 'get_uniqu_discount_code', to: 'discount_coupons#get_unique_discount_code'
+  post 'validate_discount_code', to: 'discount_coupons#validate_discount_code'
+
+  # authentication
+  get 'validate_email_for_existence', to: 'custom_user#validate_email_for_existence'
+  post 'validate_user_credentials', to: 'custom_user#validate_user_credentials'
+
+  # My account
+  get 'my_account', to: 'profile#my_account', as: 'my_account'
+  ##
+  ## My Account profile
+  get 'profile_user', to: 'profile#profile_user', as: 'profile_user'
+  # post 'update_user_profile', to: 'profile#update_user_profile'
+  post 'update_current_user_password', to: 'profile#update_current_user_password'
+  patch 'update_user', to: 'profile#update_user'
+  get 'change_cards', to: 'profile#change_cards', as: 'change_cards'
+  get 'stripe_session_create',to: 'profile#stripe_session_create'
+  get 'change_card_update', to: 'profile#change_card_update'
+  get 'my_lets_eat_card', to: 'profile#my_lets_eat_card'
+
+  ## custom meal
+  get 'macronutrients_total_calculations', to: 'custom_meal#macronutrients_total_calculations'
+  get 'custom_meal_category_macronutrient', to: 'custom_meal#custom_meal_category_macronutrient'
+  get 'custom_meal_add_to_cart', to: 'custom_meal#add_to_cart'
+  
+  # Address
+  get 'addresses', to: 'address#index', as: 'addresses'
+  post 'address', to: 'address#create'
+  get 'validate_pincode', to: 'address#validate_pincode'
+  get 'address/:id', to: 'address#show'
+  get 'address_delete/:id', to: 'address#address_destroy', as: 'address_delete'
+
+  # Home
+  get 'faqs', to: 'home#faqs'
+  # get 'contact_us', to: 'home#contact_us'
+  get 'about_us', to: 'home#about_us'
+  get 'press_media', to: 'home#press_media'
+  get 'privacy_policy', to: 'home#privacy_policy'
+  get 'terms_condition',to: 'home#terms_condition'
+  get 'notifications', to: 'home#notifications'
+end
