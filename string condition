@@ -1,0 +1,18 @@
+import java.util.Scanner;
+import java.lang.*;
+
+public class LEAKY{
+	public static void main(String[] args) {
+		
+		Scanner in= new Scanner(System.in);
+		System.out.println("Enter");
+		String a= in.nextLine();
+		if(a.equals("hhh")) {
+			System.out.println("123123");
+		}
+		else if(a.equals("ppp")) {
+			System.out.println("hey");
+			
+			
+		}
+	}}
