@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            background-color: azure;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        var anim= setInterval(grow,100);
+        var fs=5;
+        function grow(){
+            fs+=5;
+            document.getElementById("tex").innerHTML="Text Growing"
+            document.getElementById("tex").style.color="red"
+            document.getElementById("tex").style.fontSize=fs+"pt"
+            if(fs>50){
+                clearInterval(anim);
+                anim= setInterval(shrink,100);
+            }
+
+        }
+
+        function shrink(){
+            fs-=5;
+            document.getElementById("tex").innerHTML="Text Shrinking"
+            document.getElementById("tex").style.color="blue"
+            document.getElementById("tex").style.fontSize=fs+"pt"
+
+            if(fs<5){
+                clearInterval(anim);
+                anim= setInterval(grow,100);
+            }
+        }
+    </script>
+
+    <p id="tex"></p>
+</body>
+</html>
