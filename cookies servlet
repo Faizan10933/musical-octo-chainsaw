@@ -1,0 +1,301 @@
+
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ValidCook
+ */
+@WebServlet("/ValidCook")
+public class ValidCook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ValidCook() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		//get the user name value entered in the Addcook form and store it into the user variable
+		String user = request.getParameter("_usr");
+		//get the user pswd value entered in the Addcook form and store it into the pas variable
+		String pas = request.getParameter("_pwd");
+		
+		
+		Cookie[] c = request.getCookies();
+		int temp = -1;
+		for(int i=0;i<c.length;i+=2)
+		{
+			//even numbered index of cookie array c contains user name i.e 0,2,4,6
+			//odd numbered index of cookie array c contains usser pwds i.e 1,3,5,7
+			if((user.equals(c[i].getValue()))==true)
+			{
+				temp = 0;
+				if((pas.equals(c[i+1].getValue()))==true)
+				{
+					temp = 1;
+				}
+
+			}
+		}//end of for
+		
+		//--------------Display section--------------- 
+		if(temp==-1)
+		{
+			out.print("<p style =\"font-family: consolas ; text-align: center; color: red; font-size : 45px ;\">Oops!, you are not an authenticated user!</p>");
+		}
+		else if(temp==0)
+		{
+			out.print("<p style =\"font-family: consolas ; text-align: center; color: red; font-size : 45px ;\">OH! Invalid Password entered.</p>");
+		}
+		else
+		{
+			out.print("<p style =\"font-family: consolas ; text-align: center; color: green; font-size : 45px ;\">"+user+" is an authenicated user.</p>");
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add cookies__________+====================================================
+
+
+
+
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class AddCookies
+ */
+@WebServlet("/AddCookies")
+public class AddCookies extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddCookies() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		res.setContentType("text/html");
+		PrintWriter out=res.getWriter();
+		String usr1=req.getParameter("user1");
+		String pwd1=req.getParameter("pwd1");
+		String usr2=req.getParameter("user2");
+		String pwd2=req.getParameter("pwd2");
+		String usr3=req.getParameter("user3");
+		String pwd3=req.getParameter("pwd3");
+		String usr4=req.getParameter("user4");
+		String pwd4=req.getParameter("pwd4");
+		
+		Cookie c1=new Cookie("usr1",usr1);
+		Cookie p1=new Cookie("pwd1",pwd1);
+		Cookie c2=new Cookie("usr2",usr2);
+		Cookie p2=new Cookie("pwd2",pwd2);
+		Cookie c3=new Cookie("usr3",usr3);
+		Cookie p3=new Cookie("pwd3",pwd3);
+		Cookie c4=new Cookie("usr4",usr4);
+		Cookie p4=new Cookie("pwd4",pwd4);
+		res.addCookie(c1);
+		res.addCookie(p1);
+		res.addCookie(c2);
+		res.addCookie(p2);
+		res.addCookie(c3);
+		res.addCookie(p3);
+		res.addCookie(c4);
+		res.addCookie(p4);
+		out.println("COOKIES ADDED");
+		
+		//--------------------------------------LOGIN FORM---------------------------------------------
+				out.print("<html>");
+				out.print("<head><title>Login page</title>");
+				out.print("<style>");
+				out.print("body{font-family: consolas;background-color: #f5f5f5}");
+		        	out.print("div{width: 500px;box-shadow: 0px 1px 10px #a8a8a8; position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);background-color: #fff;padding-bottom: 10px}");
+				out.print("</style>");
+				out.print("</head>");
+				out.print("<body>");
+				out.print("<form method = 'POST' action = 'ValidCook'>");
+				out.print("<div>");
+				out.print("<table>");
+				out.print("<caption>LOGIN FORM</caption>");
+				out.print("<tr>");
+				out.print("<td>User name:</td><td><input type = 'text' name  = '_usr' size = 25 autofocus required /></td>");
+				out.print("</tr>");
+				out.print("<tr>");
+				out.print("<td>Password :</td><td><input type = 'password' name  = '_pwd' size = 25 required /></td>");
+				out.print("</tr>");
+				out.print("<tr>");
+				out.print("<td><input type = 'submit' value = 'Login'/></td><td><input type = 'reset'/></td>");
+				out.print("</tr>");
+				out.print("</table>");
+				out.print("</div>");
+				
+				/*out.print("User Name &nbsp&nbsp: &nbsp <input type = 'text'     name  = '_usr' size = 25 autofocus required /><br><br>");
+				out.print("Password &nbsp&nbsp : &nbsp <input type = 'password' name  = '_pwd' size = 25 required /><br><br>");
+				out.print("&nbsp&nbsp&nbsp&nbsp <input type = 'submit'   value = 'Login' />");
+				out.print("</fieldset>");*/
+				out.print("</form>");
+				out.print("</body>");
+				out.print("</html>");
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indedx.html__________===============================
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ADD COOKIE</title>
+</head>
+<body>
+<h1> ADD COOKIES</h1>
+<form method="get" action="AddCookies">
+USER 1: <input type="text" name="user1">&nbsp;&nbsp;<input type="password" name="pwd1"><br><br>
+USER 2: <input type="text" name="user2">&nbsp;&nbsp;<input type="password" name="pwd2"><br><br>
+USER 3: <input type="text" name="user3">&nbsp;&nbsp;<input type="password" name="pwd3"><br><br>
+USER 4: <input type="text" name="user4">&nbsp;&nbsp;<input type="password" name="pwd4"><br><br>
+<input type="submit" value="ADD COOKIES">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+web.xml________________==========================
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>cookiess</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
