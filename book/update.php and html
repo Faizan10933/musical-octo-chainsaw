@@ -1,0 +1,60 @@
+<html>
+<body>
+<form method="post" action="update.php">
+Enter the BookID:<input type="text" name="id">
+<input type="submit" value="Update">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+php-========================
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update</title>
+</head>
+<body>
+	<center>
+		<?php
+		$conn = mysqli_connect("localhost", "root", "", "book");
+		
+		// Check connection
+		if(!$conn){
+			echo " Database Error".mysqli_connect_error();
+		}
+		
+		// Taking all 5 values from the form data(input)
+		// $id = $_REQUEST['id'];
+        $id = $_REQUEST['id'];
+		// $name = $_REQUEST['name'];
+		// $author = $_REQUEST['author'];
+		// $publisher = $_REQUEST['publisher'];
+		// $price = $_REQUEST['price'];
+		
+		$sql = "UPDATE book SET name='hello' WHERE id='$id'";
+		
+		if(mysqli_query($conn, $sql)){
+			echo "<h3>Book updated from the database successfully.";
+
+			} else{
+			echo "ERROR". mysqli_error($conn);
+		}
+		
+		// Close connection
+		mysqli_close($conn);
+		?>
+		<a href="bookstore.html">Back</a>
+	</center>
+</body>
+
+</html>
