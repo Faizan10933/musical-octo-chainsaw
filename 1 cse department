@@ -1,0 +1,48 @@
+#hey{
+    color:green ;
+}
+
+style.css//////upperone/////
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="style.css">
+    <style>
+        body{
+            background-color: antiquewhite;
+        }
+        h3{
+        
+            color:darkblue;
+            font-weight: bold;
+            font-size: large;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:brown">CSE Department</h1><br>
+     
+    <h3>Branch</h3>
+    <div id="hey">
+    <ul>
+        <li>CS</li>
+        <li>DS</li>
+        <li>AI</li>
+    </ul>
+</div>
+    
+
+
+
+    
+</body>
+</html>
