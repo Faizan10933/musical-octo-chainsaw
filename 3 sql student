@@ -1,0 +1,48 @@
+<?php
+$name = $_POST["name"];
+$usn = $_POST["usn"];
+$branch = $_POST["branch"];
+$sem = $_POST["sem"];
+
+
+$conn= mysqli_connect("localhost","root","","mmp");
+
+if(!$conn)
+echo "Connect error".mysqli_error($conn);
+else{
+    $sql="INSERT INTO my_table VALUES($usn,'$name','$branch',$sem)";
+
+
+if(mysqli_query($conn,$sql))
+echo "inserted";
+else{
+echo "insert error".mysqli_error($conn,$sql);
+}}
+mysqli_close($conn);
+?>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="ss.php" method="post">
+    <label for="">Name</label>
+    <input type="text" name="name"><br>
+    <input type="text" name="usn"><br>
+    <input type="text" name="branch"><br>
+    <input type="text" name="sem"><br>
+    <input type="submit" value="sub">
+</form>
+    </body>
+    
+</body>
+</html>
