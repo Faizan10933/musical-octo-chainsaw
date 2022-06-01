@@ -1,0 +1,12 @@
+sum=0
+def suma(l):
+    global sum
+    if len(l)==0:
+        print("yess",sum)
+    else:
+        s=l.pop()
+        sum+=s
+        suma(l)
+l=[1,4,6]
+suma(l)
+    
